@@ -1,0 +1,12 @@
+import socket
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(('',1234))
+server.listen()
+client, addr = server.accept()
+print("Conection has established with ", addr)
+message = client.recv(1024).decode()
+print("Message from client : ",message)
+message = input("Enter the message to send to client : ")
+client.send(message.encode())
+server.close()
+client.close()
